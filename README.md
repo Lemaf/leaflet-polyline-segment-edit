@@ -8,8 +8,6 @@ Browsers usually can't handle editing large polylines with Leaflet.Draw. Each ve
 
 Tested on [Leaflet](https://github.com/Leaflet/Leaflet/releases) 1.0.0+ branch.
 
-# QUAL VERSÃO DO DRAW?
-
 Inspired by [https://github.com/openplacedatabase/gmaps-large-polygons](https://github.com/openplacedatabase/gmaps-large-polygons).
 
 ## Demos
@@ -20,7 +18,10 @@ Coming soon...
 
 ## Installing
 
+Coming soon...
+
 ## Usage
+Coming soon...
 ```js
 var options = {
     segmentSize: 250,
