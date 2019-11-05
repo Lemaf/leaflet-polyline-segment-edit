@@ -16,11 +16,7 @@ Inspired by [https://github.com/openplacedatabase/gmaps-large-polygons](https://
 
 The plugins works with both L.Polygons (multi or simple, with or without holes) and L.Polylines.
 
-[Editing Brazil (+35k coordinates)](http://www.google.com)
-
-[Multipolygons with holes](http://www.google.com)
-
-[Linestrings](http://www.google.com)
+Coming soon...
 
 ## Installing
 
