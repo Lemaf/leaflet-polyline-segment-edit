@@ -20,6 +20,10 @@
   ],
   "author": "Cláudio V. de Carvalho <claudiovicar@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lemaf/leaflet-polyline-segment-edit"
+  },
   "devDependencies": {
     "ava": "^2.4.0",
     "eslint": "^6.6.0",
