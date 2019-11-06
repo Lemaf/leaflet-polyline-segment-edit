@@ -6,23 +6,37 @@ Browsers usually can't handle editing large polylines with Leaflet.Draw. Each ve
 
 *Important: this is not a standalone plugin, it requires Leaflet.draw to work.*
 
+The plugins works with both L.Polygons (multi or simple, with or without holes) and L.Polylines.
+
 Tested on [Leaflet](https://github.com/Leaflet/Leaflet/releases) 1.0.0+ branch.
 
 Inspired by [https://github.com/openplacedatabase/gmaps-large-polygons](https://github.com/openplacedatabase/gmaps-large-polygons).
 
 ## Demos
 
-The plugins works with both L.Polygons (multi or simple, with or without holes) and L.Polylines.
-
-Coming soon...
+#### [Editing a GeoJSON with +35k coordinates](https://lemaf.github.io/leaflet-polyline-segment-edit)
 
 ## Installing
 
-Coming soon...
+You can use `npm`
+```
+$ npm install leaflet-polyline-segment-edit
+```
+or use `unpkg` (you might need to change the version)
+```
+<script src="https://unpkg.com/leaflet-polyline-segment-edit@0.1.1/leaflet.segmentedit.min.js"></script>
+```
 
 ## Usage
-Coming soon...
+Add `Leaflet`, `Leaflet.Draw` and this plugin to your page.
+
+Create and instance of `new L.Edit.PolySegmentEditing(map, geometry, options)` and enable it to start editing the geometry.
+
+You can change the segment size and style via options.
+
 ```js
+var poly = L.polygon(...);
+
 var options = {
     segmentSize: 250,
     style: {
@@ -61,9 +75,7 @@ style.hover [object] - Style to display when hovered. Useful for showing which p
 style.editing [object] - The style of the segment while being edited.
 
 
-All the styles default to Leaflet.Draw's default style.
-
-Check [Leaflet's API](https://leafletjs.com/reference-1.5.0.html#path-option) for examples.
+All the styles default to Leaflet.Draw's default style. Check [Leaflet's API](https://leafletjs.com/reference-1.5.0.html#path-option) for examples.
 
 
 ## Events
