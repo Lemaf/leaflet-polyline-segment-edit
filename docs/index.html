@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Leaflet segment edit plugin demo</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js" integrity="sha256-siofc4Uwjlra3YWkwthOn8Uj69cNN4aMug/iOHNiRgs=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="leaflet.segmentedit.min.js"></script>
+    <script type="text/javascript" src="geom/demo-brasil.js"></script>
+  </head>
+
+  <body>
+    <div class="wrapper row1">
+      <header id="header" class="clear">
+        <h1 class="left">Leaflet segment edit plugin demo</h1>
+        <h3 class="right"><a href="https://github.com/Lemaf/leaflet-polyline-segment-edit">Back to github</a></h3>
+      </header>
+    </div>
+
+    <div id="container" class="clear">
+      <div id="button-wrapper">
+        <button id="toggle-btn" onclick="toggleEdit()">
+          <span>Toggle edit</span>
+        </button>
+      </div>
+      <p>Click a segment to edit it</p>
+      <section id="map-container">
+        <div id="map"></div>
+        <p>Brasil.geojson (around 35k coordinates, ~1Mb)</p>
+      </section>
+    </div>
+
+    <footer class="clear">
+      <div>
+        <a id="logo-lemaf" href="http://www.lemaf.ufla.br/"></a>
+      </div>
+    </footer>
+  </body>
+
+  <script type="text/javascript">
+
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 24,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    var map;
+
+    var segmentEditor;
+
+    /* Overwriting Leaflet.Draw's icon style */
+    L.Edit.PolyVerticesEdit.prototype.options.touchIcon = new L.DivIcon({
+      iconSize: new L.Point(10, 10),
+      className: 'leaflet-div-icon leaflet-editing-icon leaflet-touch-icon'
+    });
+
+    function addGeometria() {
+
+      var layerBr = L.geoJson(window.BrasilGeoJSON);
+
+      map.fitBounds(layerBr.getBounds());
+
+      var poly = layerBr.getLayers()[0];
+      poly.addTo(map);
+      poly.setStyle({
+        weight: 2,
+        color: 'steelblue'
+      });
+      map.fitBounds(poly.getBounds());
+
+      var options = {
+        segmentSize: 350,
+        style: {
+          default: {
+            weight: 3,
+            color: 'tomato'
+          },
+          hover: {
+            weight: 8,
+            color: 'white'
+          },
+          editing: {
+            weight: 2,
+            color: 'gray'
+          }
+        }
+      };
+
+      segmentEditor = new L.Edit.PolySegmentEditing(map, poly, options);
+      segmentEditor.enable();
+
+      /* Listening to events */
+      map.on(L.Draw.Event.LINESEGMENTEDIT, function(event) {
+        console.log(event.layer);
+      });
+
+    }
+
+    (function () {
+      map = new L.map('map', {
+        center: new L.LatLng(-21.2799, -45.0242),
+        zoom: 10,
+        zoomControl: true,
+        layers: [osm]
+      });
+
+      addGeometria();
+    })();
+
+    function toggleEdit() {
+      if(segmentEditor.enabled()) {
+        segmentEditor.disable();
+      } else {
+        segmentEditor.enable();
+      }
+    }
+
+  </script>
+
+</html>
