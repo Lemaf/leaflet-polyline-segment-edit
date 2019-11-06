@@ -1,6 +1,6 @@
 {
   "name": "leaflet-polyline-segment-edit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An extension to Leaflet.draw to allow editing large polylines one chunk at the time",
   "scripts": {
     "pretest": "eslint index.js test/test.js",
