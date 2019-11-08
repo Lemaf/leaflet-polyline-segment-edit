@@ -183,10 +183,12 @@
            so that their first/last coordinates match the edited coordinates. */
         _redrawNeighbours: function(segment) {
             if (segment.options.previous) {
+                segment.options.previous._latlngs[0][segment.options.previous._latlngs[0].length - 1] = segment._latlngs[0][0];
                 segment.options.previous.redraw();
             }
 
             if (segment.options.next) {
+                segment.options.next._latlngs[0][0] = segment._latlngs[0][segment._latlngs[0].length - 1];
                 segment.options.next.redraw();
             }
         },
@@ -270,3 +272,4 @@
     });
     
 })();
+
